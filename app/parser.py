@@ -1,4 +1,3 @@
-# app/parser.py
 import pdfplumber
 import re
 import json

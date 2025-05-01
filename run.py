@@ -4,7 +4,7 @@ from app.routes import routes
 
 #app = create_app()
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='app/templates')
 app.secret_key = 'secret'
 app.register_blueprint(routes)
 

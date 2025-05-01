@@ -3,7 +3,7 @@ from flask import Blueprint
 from werkzeug.utils import secure_filename
 import os
 import json
-from app import parser
+#from app import parser
 from app.parser import parse_pdf
 from datetime import datetime
 
@@ -99,4 +99,31 @@ def download_latest():
         flash(f"Error downloading file: {e}")
         return redirect(url_for('routes.index'))
 
+@routes.route('/list-reports')
+def list_reports():
+    try:
+        pdf_files = [f for f in os.listdir(UPLOAD_FOLDER) if f.lower().endswith('.pdf')]
 
+        def extract_date(filename):
+            try:
+                return datetime.strptime(os.path.splitext(filename)[0], "%d%m%Y")
+            except ValueError:
+                return datetime.min
+
+        pdf_files.sort(key=extract_date, reverse=True)
+
+        # Pass list to template
+        return render_template('list_reports.html', files=pdf_files)
+
+    except Exception as e:
+        flash(f"Error listing reports: {e}")
+        return redirect(url_for('routes.index'))
+
+@routes.route('/download/<filename>')
+def download_file(filename):
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
+    if os.path.exists(file_path):
+        return send_file(file_path, as_attachment=True)
+    else:
+        flash("File not found.")
+        return redirect(url_for('routes.list_reports'))

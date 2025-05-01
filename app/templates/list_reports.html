@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title>Available Reports</title>
+</head>
+<body>
+    <h1>Available PDF Reports</h1>
+
+    {% if files %}
+        <ul>
+        {% for file in files %}
+            <li>
+                {{ file }}
+                <a href="{{ url_for('routes.download_file', filename=file) }}">
+                    <button>Download</button>
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reports found.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('routes.index') }}">Back to Home</a>
+</body>
+</html>

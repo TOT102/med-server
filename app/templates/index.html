@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Report Manager</title>
+</head>
+<body>
+    <h1>Upload PDF Report</h1>
+
+    <form method="POST" action="{{ url_for('routes.upload_file') }}" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/pdf" required>
+        <input type="submit" value="Upload">
+    </form>
+
+    <br>
+
+    <form action="{{ url_for('routes.download_latest') }}">
+        <button type="submit">Download Latest Report</button>
+    </form>
+
+    <br>
+
+    <form action="{{ url_for('routes.list_reports') }}">
+        <button type="submit">View All Reports</button>
+    </form>
+
+    <br><br>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul style="color: red;">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>
