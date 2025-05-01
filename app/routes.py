@@ -4,13 +4,14 @@ from werkzeug.utils import secure_filename
 import os
 import json
 from app import parser
+from app.parser import parse_pdf
 
 # Create a Blueprint
 routes = Blueprint('routes', __name__)
 
 ALLOWED_EXTENSIONS = {'pdf'}
 
-#Folder stuf
+#Folder stuff
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # Path to routes.py
 UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
 OUTPUT_FOLDER = os.path.join(BASE_DIR, 'output')
@@ -40,18 +41,23 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         
-        # Validate file
         if file and allowed_file(file.filename): 
             filename = secure_filename(file.filename)
             file_path = os.path.join(UPLOAD_FOLDER, filename)
             print(f"Saving file to: {file_path}")
             file.save(file_path)
 
-            # TBA: Perser goes here
+           # Run the parser and save JSON
+            json_filename = os.path.splitext(filename)[0] + '.json'
+            json_path = os.path.join(OUTPUT_FOLDER, json_filename)
+            try:
+                results = parse_pdf(file_path, output_json_path=json_path)
+                flash('File successfully uploaded and parsed.')
+            except Exception as e:
+                flash(f'Error parsing PDF: {e}')
+                return redirect(request.url)
 
-            flash('File successfully uploaded and processed')
-            return redirect(url_for('routes.upload_file'))  # Redirect 
-
+            return redirect(url_for('routes.upload_file'))
         else:
             flash('Invalid file type. Only PDF files are allowed.')
             return redirect(request.url)
