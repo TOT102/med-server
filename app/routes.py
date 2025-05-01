@@ -1,10 +1,11 @@
-from flask import request, render_template, jsonify, flash, url_for, redirect
+from flask import request, render_template, jsonify, flash, url_for, redirect, send_file, send_from_directory
 from flask import Blueprint
 from werkzeug.utils import secure_filename
 import os
 import json
 from app import parser
 from app.parser import parse_pdf
+from datetime import datetime
 
 # Create a Blueprint
 routes = Blueprint('routes', __name__)
@@ -72,6 +73,30 @@ def upload_file():
       <input type=submit value=Upload>
     </form>
     '''
+@routes.route('/download-latest')
+def download_latest():
+    try:
+        pdf_files = [f for f in os.listdir(UPLOAD_FOLDER) if f.lower().endswith('.pdf')]
 
+        if not pdf_files:
+            flash("No PDF reports found.")
+            return redirect(url_for('routes.index'))
+
+        # 'DDMMYYYY.pdf'
+        def extract_date(filename):
+            try:
+                base = os.path.splitext(filename)[0]
+                return datetime.strptime(base, "%d%m%Y")
+            except ValueError:
+                return datetime.min 
+
+        latest_file = max(pdf_files, key=extract_date)
+        latest_file_path = os.path.join(UPLOAD_FOLDER, latest_file)
+
+        return send_file(latest_file_path, as_attachment=True)
+
+    except Exception as e:
+        flash(f"Error downloading file: {e}")
+        return redirect(url_for('routes.index'))
 
 
