@@ -127,3 +127,56 @@ def download_file(filename):
     else:
         flash("File not found.")
         return redirect(url_for('routes.list_reports'))
+    
+# @routes.route('/chart-data/<indicator>')
+# def chart_data(indicator):
+#     indicator_data = []
+    
+#     for filename in sorted(os.listdir(OUTPUT_FOLDER)):
+#         if filename.endswith('.json'):
+#             date = filename.replace('.json', '') 
+#             filepath = os.path.join(OUTPUT_FOLDER, filename)
+#             with open(filepath, 'r', encoding='utf-8') as f:
+#                 data = json.load(f)
+
+#                 for category in data.values():
+#                     for entry in category:
+#                         if entry["indicator"] == indicator:
+#                             indicator_data.append({
+#                                 "date": f"{date[4:]}-{date[2:4]}-{date[:2]}",
+#                                 "value": entry["value"]
+#                             })
+
+#     return jsonify(indicator_data)
+
+@routes.route('/indicators')
+def get_indicators():
+    indicators = set()
+    for filename in os.listdir(OUTPUT_FOLDER):
+        if filename.endswith('.json'):
+            with open(os.path.join(OUTPUT_FOLDER, filename), encoding='utf-8') as f:
+                data = json.load(f)
+                for category in data.values():
+                    for entry in category:
+                        indicators.add(entry['indicator'])
+    return jsonify(sorted(indicators))
+
+@routes.route('/chart-data')
+def chart_data():
+    indicator = request.args.get('indicator')
+    indicator_data = []
+
+    for filename in sorted(os.listdir(OUTPUT_FOLDER)):
+        if filename.endswith('.json'):
+            date = filename.replace('.json', '')
+            with open(os.path.join(OUTPUT_FOLDER, filename), encoding='utf-8') as f:
+                data = json.load(f)
+                for category in data.values():
+                    for entry in category:
+                        if entry['indicator'] == indicator:
+                            indicator_data.append({
+                                "date": f"{date[4:]}-{date[2:4]}-{date[:2]}",
+                                "value": entry["value"]
+                            })
+
+    return jsonify(indicator_data)
