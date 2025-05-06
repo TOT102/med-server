@@ -43,6 +43,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="../static/styles.css">
     <meta charset="UTF-8">
     <title>Medical Data Server</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -57,62 +58,7 @@
 
     <canvas id="myChart" width="800" height="400"></canvas>
 
-    <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        let chart;
-
-        function updateChart(indicator) {
-            fetch(`/chart-data?indicator=${encodeURIComponent(indicator)}`)
-                .then(res => res.json())
-                .then(data => {
-                    const labels = data.map(entry => entry.date);
-                    const values = data.map(entry => entry.value);
-
-                    if (chart) chart.destroy();
-                    chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: indicator,
-                                data: values,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 2,
-                                fill: false,
-                                tension: 0.1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: false
-                                }
-                            }
-                        }
-                    });
-                });
-        }
-
-        // Populate dropdown with indicators
-        fetch('/indicators')
-            .then(res => res.json())
-            .then(indicators => {
-                const select = document.getElementById('indicatorSelect');
-                select.innerHTML = ''; // Clear loading text
-
-                indicators.forEach(indicator => {
-                    const option = document.createElement('option');
-                    option.value = indicator;
-                    option.textContent = indicator;
-                    select.appendChild(option);
-                });
-
-                select.addEventListener('change', () => {
-                    updateChart(select.value);
-                });
-            });
-    </script>
+    
     <h1>Upload PDF Report</h1>
 
     <form method="POST" action="{{ url_for('routes.upload_file') }}" enctype="multipart/form-data">
@@ -143,5 +89,6 @@
         </ul>
       {% endif %}
     {% endwith %}
+    <script src="../static/script.js"></script>
 </body>
 </html>
