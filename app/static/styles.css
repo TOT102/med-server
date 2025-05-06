@@ -1,4 +1,93 @@
-h2{
-   text-align: center;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} 
+
+#mdv{
+  text-align: center;
+  color: white;
+  background: skyblue;
+}  
+
+
+.button_1{
+  display: inline-flex;
+  height: 50px;
+  padding: 0;
+  background: #009578;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
+.button_1:hover{
+  background: #008168;
+}
+
+.button_1:active {
+  background: #006e58;
+}
+
+.button__text,
+.button__icon{
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  color: #fff;
+  height: 100%;
+}
+
+.button__icon{
+  font-size: 1.5em;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+
+.button_2{
+  display: inline-flex;
+  height: 50px;
+  padding: 0;
+  background: #eff3f3;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button_2:hover{
+  background: #eff3f3;
+}
+
+.button_2:active {
+  background: #eff3f3;
+}
+
+.button__text_1,
+.button__icon_1{
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  color: #fff;
+  height: 100%;
+}
+
+.button__text_1
+{
+  color: black;
+}
+.button__icon_1{
+  font-size: 1.5em;
+  background-color: rgba(0, 0, 0, 0.08);
+}

@@ -52,3 +52,4 @@ const ctx = document.getElementById('myChart').getContext('2d');
                     updateChart(select.value);
                 });
             });
+

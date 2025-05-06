@@ -1,55 +1,15 @@
-<!---
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>PDF Report Manager</title>
-</head>
-<body>
-    <h1>Upload PDF Report</h1>
-
-    <form method="POST" action="{{ url_for('routes.upload_file') }}" enctype="multipart/form-data">
-        <input type="file" name="file" accept="application/pdf" required>
-        <input type="submit" value="Upload">
-    </form>
-
-    <br>
-
-    <form action="{{ url_for('routes.download_latest') }}">
-        <button type="submit">Download Latest Report</button>
-    </form>
-
-    <br>
-
-    <form action="{{ url_for('routes.list_reports') }}">
-        <button type="submit">View All Reports</button>
-    </form>
-
-    <br><br>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul style="color: red;">
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-</body>
-</html>
--->
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <link rel="stylesheet" href="../static/styles.css">
     <meta charset="UTF-8">
     <title>Medical Data Server</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h2>Medical Indicator Viewer</h2>
+  <div id="mdv">
+    <h2>Medical Indicator Viewer</h2> 
+  </div>  
 
     <label for="indicatorSelect">Select Indicator:</label>
     <select id="indicatorSelect">
@@ -69,13 +29,27 @@
     <br>
 
     <form action="{{ url_for('routes.download_latest') }}">
-        <button type="submit">Download Latest Report</button>
+
+        <button type="submit" class="button_1">
+          <span class="button__text">Download Latest Report</span>
+          <span class="button__icon">
+            <ion-icon name="download-outline"></ion-icon>
+          </span>
+        </button>
+        
     </form>
 
     <br>
 
     <form action="{{ url_for('routes.list_reports') }}">
-        <button type="submit">View All Reports</button>
+
+        <button type="submit" class="button_2">
+         <span class="button__text_1">View All Reports</span>
+         <span class="button__icon_1">
+           <ion-icon name="eye-outline"></ion-icon>
+         </span>
+        </button>
+
     </form>
 
     <br><br>
@@ -90,5 +64,11 @@
       {% endif %}
     {% endwith %}
     <script src="../static/script.js"></script>
+    
+    <!--! Ionicons !-->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!--! Ionicons !-->
+
 </body>
 </html>
