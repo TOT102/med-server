@@ -9,9 +9,20 @@
 #mdv{
   text-align: center;
   color: white;
-  background: skyblue;
+  background: grey;
 }  
 
+.top-left-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top: solid 0.5rem grey;
+  border-left: solid 0.5rem grey;
+}
+  
+body{
+  border: solid 0.5rem grey;
+}
 
 .button_1{
   display: inline-flex;
@@ -90,4 +101,14 @@
 .button__icon_1{
   font-size: 1.5em;
   background-color: rgba(0, 0, 0, 0.08);
+}
+
+
+.home{
+  display: inline-block;
+}
+
+.home ol{
+  list-style-type: none;
+  padding-left: 0;
 }
