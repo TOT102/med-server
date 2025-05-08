@@ -3,6 +3,7 @@ from flask import Blueprint
 from werkzeug.utils import secure_filename
 import os
 import json
+import re
 #from app import parser
 from app.parser import parse_pdf
 from datetime import datetime
@@ -230,5 +231,45 @@ def get_avg():
                         if entry['indicator'] == indicator:
                             indicator_data.append(entry["value"])
 
-    indicator_avg = sum(indicator_data)/len(indicator_data)                   
+    if not indicator_data:
+        return jsonify(None) 
+    
+    indicator_avg = sum(indicator_data)/len(indicator_data) 
+    
     return jsonify(indicator_avg)
+
+@routes.route("/get-margin-values")
+def get_margin_values():
+    indicator = request.args.get("indicator")
+    min_value = None
+    max_value = None
+
+    def extract_date(filename):
+        try:
+            return datetime.strptime(os.path.splitext(filename)[0], "%d%m%Y")
+        except ValueError:
+            return datetime.min
+
+    json_files = [f for f in os.listdir(OUTPUT_FOLDER) if f.endswith('.json')]
+    if not json_files:
+        return jsonify({"min": None, "max": None})
+
+    latest_file = max(json_files, key=extract_date)
+    latest_path = os.path.join(OUTPUT_FOLDER, latest_file)
+
+    with open(latest_path, encoding='utf-8') as f:
+        data = json.load(f)
+        for category in data.values():
+            for entry in category:
+                if entry['indicator'] == indicator:
+                    ref_range = entry.get('reference_range', '')
+          
+                    match = re.findall(r"[-+]?\d*\.\d+|\d+", ref_range)
+                    if len(match) >= 2:
+                        min_value = float(match[0])
+                        max_value = float(match[1])
+                    break  
+            if min_value is not None:
+                break
+
+    return jsonify({"min": min_value, "max": max_value})
