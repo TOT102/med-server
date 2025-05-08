@@ -180,3 +180,55 @@ def chart_data():
                             })
 
     return jsonify(indicator_data)
+
+@routes.route("/get-min")
+def get_min():
+    indicator = request.args.get("indicator")
+    indicator_data = []
+
+    for filename in sorted(os.listdir(OUTPUT_FOLDER)):
+        if filename.endswith('.json'):
+            date = filename.replace('.json', '')
+            with open(os.path.join(OUTPUT_FOLDER, filename), encoding='utf-8') as f:
+                data = json.load(f)
+                for category in data.values():
+                    for entry in category:
+                        if entry['indicator'] == indicator:
+                            indicator_data.append(entry["value"])
+                            
+    return jsonify(min(indicator_data))
+
+@routes.route("/get-max")
+def get_max():
+    indicator = request.args.get("indicator")
+    indicator_data = []
+
+    for filename in sorted(os.listdir(OUTPUT_FOLDER)):
+        if filename.endswith('.json'):
+            date = filename.replace('.json', '')
+            with open(os.path.join(OUTPUT_FOLDER, filename), encoding='utf-8') as f:
+                data = json.load(f)
+                for category in data.values():
+                    for entry in category:
+                        if entry['indicator'] == indicator:
+                            indicator_data.append(entry["value"])
+                            
+    return jsonify(max(indicator_data))
+
+@routes.route("/get-avg")
+def get_avg():
+    indicator = request.args.get("indicator")
+    indicator_data = []
+
+    for filename in sorted(os.listdir(OUTPUT_FOLDER)):
+        if filename.endswith('.json'):
+            date = filename.replace('.json', '')
+            with open(os.path.join(OUTPUT_FOLDER, filename), encoding='utf-8') as f:
+                data = json.load(f)
+                for category in data.values():
+                    for entry in category:
+                        if entry['indicator'] == indicator:
+                            indicator_data.append(entry["value"])
+
+    indicator_avg = sum(indicator_data)/len(indicator_data)                   
+    return jsonify(indicator_avg)
