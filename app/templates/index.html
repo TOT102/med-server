@@ -10,14 +10,30 @@
 </head>
 <body>
    
-  <div id="image">
-    <img src="https://i0.wp.com/geographicbook.com/wp-content/uploads/2024/12/Health-Indicators.png?fit=1024%2C576&ssl=1" alt="med view" width="100" height="50" class="top-left-image">
-  </div>
-  <nav>
-   <ul>
-    <li><a href="index.html"> Home </a></li>
-   </ul>
-  </nav>
+  <div class="button-container">
+    <form action="{{ url_for('routes.download_latest') }}">
+
+        <button type="submit" class="button_1">
+          <span class="button__text">Download Latest Report</span>
+          <span class="button__icon">
+            <ion-icon name="download-outline"></ion-icon>
+          </span>
+        </button>
+        
+    </form>
+
+    <form action="{{ url_for('routes.list_reports') }}">
+
+        <button type="submit" class="button_2">
+         <span class="button__text_1">View All Reports</span>
+         <span class="button__icon_1">
+           <ion-icon name="eye-outline"></ion-icon>
+         </span>
+        </button>
+
+    </form>
+   </div>
+   
 
     <label for="indicatorSelect">Select Indicator:</label>
     <select id="indicatorSelect">
@@ -34,31 +50,7 @@
         <input type="submit" value="Upload">
     </form>
 
-    <br>
-
-    <form action="{{ url_for('routes.download_latest') }}">
-
-        <button type="submit" class="button_1">
-          <span class="button__text">Download Latest Report</span>
-          <span class="button__icon">
-            <ion-icon name="download-outline"></ion-icon>
-          </span>
-        </button>
-        
-    </form>
-
-    <br>
-
-    <form action="{{ url_for('routes.list_reports') }}">
-
-        <button type="submit" class="button_2">
-         <span class="button__text_1">View All Reports</span>
-         <span class="button__icon_1">
-           <ion-icon name="eye-outline"></ion-icon>
-         </span>
-        </button>
-
-    </form>
+    
 
     <br><br>
 
