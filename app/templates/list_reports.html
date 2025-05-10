@@ -1,27 +1,30 @@
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" href="../static/styles.css">
+    <meta charset="UTF-8">
     <title>Available Reports</title>
 </head>
-<body>
-    <h1>Available PDF Reports</h1>
+<body class="download-page">
+    <div class="dp-container">
+        <h1 class="dp-page-title">Available PDF Reports</h1>
 
-    {% if files %}
-        <ul>
-        {% for file in files %}
-            <li>
-                {{ file }}
-                <a href="{{ url_for('routes.download_file', filename=file) }}">
-                    <button>Download</button>
-                </a>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No reports found.</p>
-    {% endif %}
-
-    <br>
-    <a href="{{ url_for('routes.index') }}">Back to Home</a>
+        {% if files %}
+            <ul class="dp-file-list">
+            {% for file in files %}
+                <li class="dp-report-item">
+                    {{ file }}
+                    <a href="{{ url_for('routes.download_file', filename=file) }}" class="dp-download-link">
+                        <button class="dp-download-button">Download</button>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p class="dp-no-reports">No reports found.</p>
+        {% endif %}
+        
+        <a href="{{ url_for('routes.index') }}" class="dp-back-link">Back to Home</a>
+    </div>
 </body>
 </html>

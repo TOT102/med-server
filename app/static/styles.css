@@ -7,10 +7,9 @@
 } 
   
 body{
-  border: solid 0.5rem grey;
-  
+  border: solid 0.5rem rgb(255, 255, 255); /* test how white border looks */
+  font-family: 'Roboto', sans-serif; /* Main shrift to be used*/
 }
-
 
 .button_1{
   display: inline-flex;
@@ -40,7 +39,6 @@ body{
   background: #006e58;
 }
 
-
 .button__text,
 .button__icon{
   display: inline-flex;
@@ -54,7 +52,6 @@ body{
   font-size: 1.5em;
   background-color: rgba(0, 0, 0, 0.08);
 }
-
 
 .button_2{
   display: inline-flex;
@@ -135,4 +132,79 @@ body{
   padding-top: 30px;
 }
 
+/* Styles for reports page */
+.download-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 0;
+    margin: 0;
+}
 
+.dp-container {
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dp-page-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.dp-file-list {
+    list-style: none;
+    padding: 0;
+}
+
+.dp-report-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.download-page-file-name {
+    font-size: 16px;
+    color: #444;
+}
+
+.dp-download-button {
+    padding: 6px 14px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.dp-download-button:hover {
+    background-color: #45a049;
+}
+
+.dp-no-reports {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+.dp-back-link {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dp-back-link:hover {
+    text-decoration: underline;
+}
