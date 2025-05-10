@@ -53,3 +53,14 @@ const ctx = document.getElementById('myChart').getContext('2d');
                 });
             });
 
+            async function fetchIndicatorValue() {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/get-margin-values?indicator=P-LCR');
+        const data = await response.json();
+        document.getElementById('value-box').innerText = data.value; // Adjust depending on your JSON
+      } catch (error) {
+        document.getElementById('value-box').innerText = 'Error loading data';
+        console.error(error);
+      }
+    }
+
