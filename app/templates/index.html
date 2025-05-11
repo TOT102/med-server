@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
-
+ 
     <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <meta charset="UTF-8">
     <title>Medical Data Server</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
-<body>
+<body class="board-fm">
    
   <div class="button-container">
   
@@ -23,17 +24,6 @@
         
     </form>
 
- 
-    <div class="container-">
-
-   <label for="indicatorSelect">Select Indicator:</label>
-    <select id="indicatorSelect">
-        <option disabled selected>Loading...</option>
-    </select>
-  
-    <canvas id="myChart" width="400" height="400"></canvas>
-
-    </div>    
     
     <form action="{{ url_for('routes.list_reports') }}">
 
@@ -46,32 +36,34 @@
          
     </form> 
 
- <div class="form-container">
+  <div class="form-container">
 
-    <form method="POST" action="{{ url_for('routes.upload_file') }}" enctype="multipart/form-data">
-        <span>
-          <ion-icon name="document-outline"></ion-icon>
-          <input type="file" name="file" accept="application/pdf" class="icon-button" required>
-        </span>
-        
-        
-        <span>
-        <label></label>
-        <input type="submit" value="Upload">
-        <ion-icon name="cloud-upload-outline"></ion-icon>
-        </span>
-    </form>
+  <form id="uploadForm" method="POST" action="{{ url_for('routes.upload_file') }}" enctype="multipart/form-data">
+  <input type="file" id="fileInput" name="file" style="display: none;" required>
+  <button type="button" id="customButton">
+    <ion-icon name="cloud-upload-outline"></ion-icon>
+    Choose | Upload
+  </button>
+  </form>
+
+  </div>
 
 </div>
-
-   </div>
    
-    
-
+     
  
 
-    
 
+<div class="selector-b">
+ <label for="indicatorSelect">Select Indicator:</label>
+    <select id="indicatorSelect">
+        <option disabled selected>Loading...</option>
+    </select>
+  
+    <canvas id="myChart" width="800" height="600"></canvas>
+</div>
+ 
+       
     <br><br>
 
     {% with messages = get_flashed_messages() %}
