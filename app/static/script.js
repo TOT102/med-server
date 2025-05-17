@@ -50,6 +50,9 @@ const ctx = document.getElementById('myChart').getContext('2d');
 
                 select.addEventListener('change', () => {
                     updateChart(select.value);
+                    fetchMaxValue(select.value);
+                    fetchAvgValue(select.value);
+                    fetchMinValue(select.value);
                 });
             });
 
@@ -78,3 +81,40 @@ document.getElementById('customButton').addEventListener('click', () => {
 document.getElementById('customButton').addEventListener('click', function () {
   document.getElementById('fileInput').click();
 });
+
+function fetchMaxValue(indicator) {
+    fetch(`/get-max?indicator=${encodeURIComponent(indicator)}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('maxValue').textContent = data;  
+        })
+        .catch(err => {
+            console.error('Failed to fetch max value:', err);
+            document.getElementById('maxValue').textContent = 'Error';
+        });
+}
+
+function fetchMinValue(indicator) {
+    fetch(`/get-min?indicator=${encodeURIComponent(indicator)}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('minValue').textContent = data;  
+        })
+        .catch(err => {
+            console.error('Failed to fetch min value:', err);
+            document.getElementById('minValue').textContent = 'Error';
+        });
+}
+
+function fetchAvgValue(indicator) {
+    fetch(`/get-avg?indicator=${encodeURIComponent(indicator)}`)
+        .then(res => res.json())
+        .then(data => {
+            const roundedAvg = Number(data).toFixed(2);
+            document.getElementById('avgValue').textContent = roundedAvg;  
+        })
+        .catch(err => {
+            console.error('Failed to fetch avg value:', err);
+            document.getElementById('avgValue').textContent = 'Error';
+        });
+}

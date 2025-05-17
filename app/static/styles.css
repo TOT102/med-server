@@ -5,6 +5,18 @@
   box-sizing: border-box;
 }
 
+.sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Push top and bottom content apart */
+  gap: 20px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f8f9fa;
@@ -99,6 +111,40 @@ body {
   color: red;
   padding: 20px;
   list-style: none;
+}
+
+/* Indicator Values */
+/* Box for Indicator Values */
+.indicator-box {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.indicator-value {
+  background-color: #e9ecef;
+  color: #333;
+  cursor: default;
+  justify-content: space-between;
+  font-weight: 500;
+}
+
+.indicator-value:hover {
+  background-color: #e9ecef; /* No hover change */
+}
+
+.indicator-value:active {
+  background-color: #e9ecef; /* No active effect */
+}
+
+.indicator-value span:last-child {
+  font-weight: bold;
+  color: #009578;
 }
 
 /* Styles for reports page */

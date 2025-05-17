@@ -22,8 +22,20 @@
       </div>
     </div>
 
-    <!-- Sidebar with Buttons -->
+    <!-- Sidebar with Buttons and indicators -->
     <div class="sidebar">
+      <div class="sidebar-button indicator-value">
+        <span>Max:</span>
+        <span id="maxValue">-</span>
+      </div>
+      <div class="sidebar-button indicator-value">
+        <span>Avarage:</span>
+        <span id="avgValue">-</span>
+      </div>
+      <div class="sidebar-button indicator-value">
+        <span>Min:</span>
+        <span id="minValue">-</span>
+      </div> 
 
       <form action="{{ url_for('routes.download_latest') }}">
         <button type="submit" class="sidebar-button">
@@ -45,11 +57,11 @@
           <span>Choose | Upload</span>
           <ion-icon name="cloud-upload-outline"></ion-icon>
         </button>
-      </form>
+      </form> 
 
     </div>
   </div>
-
+    
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       <ul class="message-list">
