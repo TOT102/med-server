@@ -1,0 +1,180 @@
+/* Reset & Base Styles */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Layout Containers */
+.dashboard-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  padding: 40px;
+}
+
+.chart-area {
+  flex: 1;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.sidebar-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  font-size: 16px;
+  background-color: #009578;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar-button:hover {
+  background-color: #008168;
+}
+
+.sidebar-button:active {
+  background-color: #006e58;
+}
+
+.sidebar-button ion-icon {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+/* Chart */
+.chart-container {
+  width: 100%;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+/* Dropdown */
+.select-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+#indicatorSelect {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Flash Message */
+.message-list {
+  color: red;
+  padding: 20px;
+  list-style: none;
+}
+
+/* Styles for reports page */
+.download-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 0;
+    margin: 0;
+}
+
+.dp-container {
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dp-page-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.dp-file-list {
+    list-style: none;
+    padding: 0;
+    
+}
+
+.dp-report-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.download-page-file-name {
+    font-size: 16px;
+    color: #444;
+}
+
+.dp-download-button {
+    padding: 6px 14px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.dp-download-button:hover {
+    background-color: #45a049;
+}
+
+.dp-no-reports {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+.dp-back-link {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dp-back-link:hover {
+    text-decoration: underline;
+}

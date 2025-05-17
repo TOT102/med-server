@@ -66,14 +66,15 @@ def upload_file():
 
     # If GET request -> render simple upload frontend 
     return '''
-    <!doctype html>
-    <title>Upload PDF</title>
-    <h1>Upload PDF File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file accept="application/pdf">
-      <input type=submit value=Upload>
-    </form>
+        <!doctype html>
+        <title>Upload PDF</title>
+        <h1>Upload PDF File</h1>
+        <form method=post enctype=multipart/form-data>
+          <input type=file name=file accept="application/pdf">
+          <input type=submit value=Upload>
+        </form>
     '''
+
 @routes.route('/download-latest')
 def download_latest():
     try:
