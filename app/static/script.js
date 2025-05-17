@@ -74,3 +74,7 @@ document.getElementById('customButton').addEventListener('click', () => {
     }
   };
 });
+
+document.getElementById('customButton').addEventListener('click', function () {
+  document.getElementById('fileInput').click();
+});

@@ -1,86 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
- 
-    <link rel="stylesheet" href="../static/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <meta charset="UTF-8">
-    <title>Medical Data Server</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Data Server</title>
+  <link rel="stylesheet" href="../static/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="board-fm">
-   
-  <div class="button-container">
-  
-    <form action="{{ url_for('routes.download_latest') }}">
+  <div class="dashboard-layout">
 
-        <button type="submit" class="button_1">
-          <span class="button__text">Download Latest Report</span>
-          <span class="button__icon">
-            <ion-icon name="download-outline"></ion-icon>
-          </span>
+    <!-- Chart Area -->
+    <div class="chart-area">
+      <div class="chart-container">
+        <label for="indicatorSelect" class="select-label">Select Indicator:</label>
+        <select id="indicatorSelect">
+          <option disabled selected>Loading...</option>
+        </select>
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Sidebar with Buttons -->
+    <div class="sidebar">
+
+      <form action="{{ url_for('routes.download_latest') }}">
+        <button type="submit" class="sidebar-button">
+          <span>Download Latest Report</span>
+          <ion-icon name="cloud-download-outline"></ion-icon>
         </button>
-        
-    </form>
+      </form>
 
-    
-    <form action="{{ url_for('routes.list_reports') }}">
-
-        <button type="submit" class="button_2">
-         <span class="button__text_1">View All Reports</span>
-         <span class="button__icon_1">
-           <ion-icon name="eye-outline"></ion-icon>
-         </span>
+      <form action="{{ url_for('routes.list_reports') }}">
+        <button type="submit" class="sidebar-button">
+          <span>View All Reports</span>
+          <ion-icon name="eye-outline"></ion-icon>
         </button>
-         
-    </form> 
+      </form>
 
-  <div class="form-container">
+      <form id="uploadForm" method="POST" action="{{ url_for('routes.upload_file') }}" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file" style="display: none;" required>
+        <button type="button" id="customButton" class="sidebar-button">
+          <span>Choose | Upload</span>
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+        </button>
+      </form>
 
-  <form id="uploadForm" method="POST" action="{{ url_for('routes.upload_file') }}" enctype="multipart/form-data">
-  <input type="file" id="fileInput" name="file" style="display: none;" required>
-  <button type="button" id="customButton">
-    <ion-icon name="cloud-upload-outline"></ion-icon>
-    Choose | Upload
-  </button>
-  </form>
-
+    </div>
   </div>
 
-</div>
-   
-     
- 
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="message-list">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
 
-
-<div class="selector-b">
- <label for="indicatorSelect">Select Indicator:</label>
-    <select id="indicatorSelect">
-        <option disabled selected>Loading...</option>
-    </select>
-  
-    <canvas id="myChart" width="800" height="600"></canvas>
-</div>
- 
-       
-    <br><br>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul style="color: red;">
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    <script src="../static/script.js"></script>
-    
-    <!--! Ionicons !-->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <!--! Ionicons !-->
-
+  <script src="../static/script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
