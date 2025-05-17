@@ -9,6 +9,11 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="board-fm">
+
+  <div id="uploadSuccessPopup" class="top-popup hidden">
+  File uploaded successfully!
+  </div>
+
   <div class="dashboard-layout">
 
     <!-- Chart Area -->
@@ -62,16 +67,6 @@
     </div>
   </div>
     
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul class="message-list">
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-
   <script src="../static/script.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

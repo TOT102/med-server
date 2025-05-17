@@ -106,13 +106,6 @@ body {
   border: 1px solid #ccc;
 }
 
-/* Flash Message */
-.message-list {
-  color: red;
-  padding: 20px;
-  list-style: none;
-}
-
 /* Indicator Values */
 /* Box for Indicator Values */
 .indicator-box {
@@ -224,3 +217,33 @@ body {
 .dp-back-link:hover {
     text-decoration: underline;
 }
+
+/* UPLOAD POPUP */
+.top-popup {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745;
+  color: white;
+  padding: 16px 32px;
+  font-size: 16px;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.top-popup.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.top-popup.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-100%);
+}
+

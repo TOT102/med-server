@@ -67,7 +67,7 @@ const ctx = document.getElementById('myChart').getContext('2d');
     //   }
     // }
 
-document.getElementById('customButton').addEventListener('click', () => {
+/*document.getElementById('customButton').addEventListener('click', () => {
   const fileInput = document.getElementById('fileInput');
   fileInput.click();
 
@@ -80,6 +80,29 @@ document.getElementById('customButton').addEventListener('click', () => {
 
 document.getElementById('customButton').addEventListener('click', function () {
   document.getElementById('fileInput').click();
+});*/
+
+const fileInput = document.getElementById('fileInput');
+const customButton = document.getElementById('customButton');
+const uploadForm = document.getElementById('uploadForm');
+
+customButton.addEventListener('click', () => {
+  fileInput.click();
+});
+
+fileInput.addEventListener('change', () => {
+  if (fileInput.files.length > 0) {
+    uploadForm.submit();
+
+    const popup = document.getElementById('uploadSuccessPopup');
+    popup.classList.remove('hidden');
+    popup.classList.add('show');
+
+    setTimeout(() => {
+      popup.classList.remove('show');
+      popup.classList.add('hidden');
+    }, 10000);
+  }
 });
 
 function fetchMaxValue(indicator) {

@@ -65,15 +65,7 @@ def upload_file():
             return redirect(request.url)
 
     # If GET request -> render simple upload frontend 
-    return '''
-        <!doctype html>
-        <title>Upload PDF</title>
-        <h1>Upload PDF File</h1>
-        <form method=post enctype=multipart/form-data>
-          <input type=file name=file accept="application/pdf">
-          <input type=submit value=Upload>
-        </form>
-    '''
+    return redirect(url_for('routes.index'))
 
 @routes.route('/download-latest')
 def download_latest():
