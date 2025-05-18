@@ -1,38 +1,79 @@
 const ctx = document.getElementById('myChart').getContext('2d');
         let chart;
 
-        function updateChart(indicator) {
-            fetch(`/chart-data?indicator=${encodeURIComponent(indicator)}`)
-                .then(res => res.json())
-                .then(data => {
-                    const labels = data.map(entry => entry.date);
-                    const values = data.map(entry => entry.value);
+        async function updateChart(indicator) {
+            const chartData = await fetch(`/chart-data?indicator=${encodeURIComponent(indicator)}`).then(res => res.json());
+            const marginValues = await fetch(`/get-margin-values?indicator=${encodeURIComponent(indicator)}`).then(res => res.json());
 
-                    if (chart) chart.destroy();
-                    chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: indicator,
-                                data: values,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 2,
-                                fill: false,
-                                tension: 0.1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: false
+            const labels = chartData.map(entry => entry.date);
+            const values = chartData.map(entry => entry.value);
+
+            const maxYValue = Math.max(...values);
+            //const buffer = (maxYValue * 0.2); // 20% buffer above data range
+            const chartMaxY = maxYValue*1.5;
+
+            if (chart) chart.destroy();
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: indicator,
+                        data: values,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            suggestedMax: chartMaxY
+                        }
+                    },
+                    plugins: {
+                        annotation: {
+                            annotations: {
+                                unsafeLow: {
+                                    type: 'box',
+                                    yMin: 0,
+                                    yMax: marginValues.min,
+                                    xMin: 0,
+                                    xMax: labels.length - 1,
+                                    backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                                    borderWidth: 0,
+                                    /*label: {
+                                        enabled: true,
+                                        content: 'Below safe range',
+                                        position: 'start'
+                                    }*/
+                                },
+                                unsafeHigh: {
+                                    type: 'box',
+                                    yMin: marginValues.max,
+                                    yMax: chartMaxY*1.2,
+                                    xMin: 0,
+                                    xMax: labels.length - 1,
+                                    backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                                    borderWidth: 0,
+                                    /*label: {
+                                        enabled: true,
+                                        content: 'Above safe range',
+                                        position: 'end'
+                                    }*/
                                 }
                             }
                         }
-                    });
-                });
+                    }
+                },
+                plugins: [Chart.registry.getPlugin('annotation')]
+            });
         }
+
 
         // Populate dropdown with indicators
         fetch('/indicators')
@@ -140,4 +181,10 @@ function fetchAvgValue(indicator) {
             console.error('Failed to fetch avg value:', err);
             document.getElementById('avgValue').textContent = 'Error';
         });
+}
+
+async function fetchMarginValues(indicator) {
+    const response = await fetch(`/get-margin-values?indicator=${encodeURIComponent(indicator)}`);
+    const data = await response.json();
+    return data;
 }
