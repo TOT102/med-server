@@ -11,15 +11,15 @@
   flex-direction: column;
   justify-content: space-between; /* Push top and bottom content apart */
   gap: 20px;
-  background: #ffffff;
+  background: #f8f9fa;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px #ffffff8f;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #f8f9fa;
+  background-color: #19345c8e;
 }
 
 /* Layout Containers */
@@ -32,7 +32,7 @@ body {
 
 .chart-area {
   flex: 1;
-  background: #ffffff;
+  background: #ffffff8f;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -43,7 +43,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background: #ffffff;
+  background: #ffffff8f;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -59,7 +59,7 @@ body {
   padding: 0 16px;
   font-size: 16px;
   background-color: #009578;
-  color: #fff;
+  color: #f8f9fa;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -103,7 +103,7 @@ body {
   padding: 8px 12px;
   margin-bottom: 20px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #f8f9fa;
 }
 
 /* Indicator Values */
@@ -111,7 +111,7 @@ body {
 .indicator-box {
   padding: 20px;
   background-color: #f8f9fa;
-  border: 1px solid #ddd;
+  border: 1px solid #f8f9fa;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -120,7 +120,7 @@ body {
 }
 
 .indicator-value {
-  background-color: #e9ecef;
+  background-color: #f8f9fa;
   color: #333;
   cursor: default;
   justify-content: space-between;
@@ -128,11 +128,11 @@ body {
 }
 
 .indicator-value:hover {
-  background-color: #e9ecef; /* No hover change */
+  background-color: #f8f9fa; /* No hover change */
 }
 
 .indicator-value:active {
-  background-color: #e9ecef; /* No active effect */
+  background-color: #f8f9fa; /* No active effect */
 }
 
 .indicator-value span:last-child {
@@ -146,7 +146,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #19345c8e;
     padding: 0;
     margin: 0;
 }
@@ -154,7 +154,7 @@ body {
 .dp-container {
     max-width: 1200px;
     margin: 40px auto 0 auto;
-    background: white;
+    background: #ffffff8f;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -177,7 +177,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ffffff8f;
 }
 
 .download-page-file-name {
@@ -190,13 +190,13 @@ body {
     font-size: 14px;
     border: none;
     border-radius: 8px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #009578;
+    color: #ffffff8f;
     cursor: pointer;
 }
 
 .dp-download-button:hover {
-    background-color: #45a049;
+    background-color: #008168;
 }
 
 .dp-no-reports {
@@ -209,12 +209,13 @@ body {
     display: block;
     margin-top: 30px;
     text-align: center;
-    color: #007bff;
+    color: #009578;
     text-decoration: none;
     font-weight: bold;
 }
 
 .dp-back-link:hover {
+    color: #008168;
     text-decoration: underline;
 }
 
@@ -224,7 +225,7 @@ body {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #28a745;
+  background-color: #009578;
   color: white;
   padding: 16px 32px;
   font-size: 16px;
