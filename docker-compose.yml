@@ -1,0 +1,17 @@
+services:
+  medapp:
+    build: .
+    container_name: med-service
+    command: gunicorn -w 4 -b 0.0.0.0:5000 run:app
+    ports:
+      - "5000:5000"
+    volumes:                 
+      - app/upload:/opt/med-service/upload    
+      - app/output:/opt/med-service/output    
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+volumes:
+  upload:
+  output:

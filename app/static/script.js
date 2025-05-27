@@ -2,8 +2,8 @@ const ctx = document.getElementById('myChart').getContext('2d');
         let chart;
 
         async function updateChart(indicator) {
-            const chartData = await fetch(`/med/chart-data?indicator=${encodeURIComponent(indicator)}`).then(res => res.json());
-            const marginValues = await fetch(`/med/get-margin-values?indicator=${encodeURIComponent(indicator)}`).then(res => res.json());
+            const chartData = await fetch(`chart-data?indicator=${encodeURIComponent(indicator)}`).then(res => res.json());
+            const marginValues = await fetch(`get-margin-values?indicator=${encodeURIComponent(indicator)}`).then(res => res.json());
 
             const labels = chartData.map(entry => entry.date);
             const values = chartData.map(entry => entry.value);
@@ -76,7 +76,7 @@ const ctx = document.getElementById('myChart').getContext('2d');
 
 
         // Populate dropdown with indicators
-        fetch('/med/indicators')
+        fetch('indicators')
             .then(res => res.json())
             .then(indicators => {
                 const select = document.getElementById('indicatorSelect');
@@ -147,7 +147,7 @@ fileInput.addEventListener('change', () => {
 });
 
 function fetchMaxValue(indicator) {
-    fetch(`/med/get-max?indicator=${encodeURIComponent(indicator)}`)
+    fetch(`get-max?indicator=${encodeURIComponent(indicator)}`)
         .then(res => res.json())
         .then(data => {
             document.getElementById('maxValue').textContent = data;  
@@ -159,7 +159,7 @@ function fetchMaxValue(indicator) {
 }
 
 function fetchMinValue(indicator) {
-    fetch(`/med/get-min?indicator=${encodeURIComponent(indicator)}`)
+    fetch(`get-min?indicator=${encodeURIComponent(indicator)}`)
         .then(res => res.json())
         .then(data => {
             document.getElementById('minValue').textContent = data;  
@@ -171,7 +171,7 @@ function fetchMinValue(indicator) {
 }
 
 function fetchAvgValue(indicator) {
-    fetch(`/med/get-avg?indicator=${encodeURIComponent(indicator)}`)
+    fetch(`get-avg?indicator=${encodeURIComponent(indicator)}`)
         .then(res => res.json())
         .then(data => {
             const roundedAvg = Number(data).toFixed(2);
@@ -184,7 +184,7 @@ function fetchAvgValue(indicator) {
 }
 
 async function fetchMarginValues(indicator) {
-    const response = await fetch(`/get-margin-values?indicator=${encodeURIComponent(indicator)}`);
+    const response = await fetch(`get-margin-values?indicator=${encodeURIComponent(indicator)}`);
     const data = await response.json();
     return data;
 }

@@ -9,7 +9,7 @@ from app.parser import parse_pdf
 from datetime import datetime
 
 # Create a Blueprint
-routes = Blueprint('routes', __name__, url_prefix='/med')
+routes = Blueprint('routes', __name__)
 
 ALLOWED_EXTENSIONS = {'pdf'}
 
